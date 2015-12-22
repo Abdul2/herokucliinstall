@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+#Modified script
+#Find original: https://toolbelt.heroku.com/install.sh
+#Step 1- cd $HOME
+#Step 2- touch install-heroku.sh
+#Step 3- vim install-heroku.sh
+#Step 4- Copy and paste script below
+#Step 5- bash install-heroku
+
+
+HEROKU_CLIENT_URL="https://s3.amazonaws.com/assets.heroku.com/heroku-client/heroku-client.tgz"
+
+echo "This script installs heroku client on your home directory."
+echo "Sudo rights are not required."
+
+  # download and extract the client tarball
+  rm -rf $HOME/heroku
+  mkdir -p $HOME/heroku
+  cd $HOME/heroku
+
+  if [[ -z "$(which wget)" ]]; then
+    curl -s $HEROKU_CLIENT_URL | tar xz
+  else
+    wget -qO- $HEROKU_CLIENT_URL | tar xz
+  fi
+
+  mv heroku-client/* .
+  rmdir heroku-client
+
+SCRIPT
+
+# remind the user to add to $PATH
+  echo "Add the Heroku CLI to your PATH using:"
+  echo "export PATH=${HOME}/heroku/bin:${PATH}"
+
+echo "Installation complete"
